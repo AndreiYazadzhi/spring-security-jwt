@@ -27,7 +27,7 @@ public class RecordController {
         recordService.add(recordMapper.fromDto(recordRequest));
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/{id}")
     public void add(@PathVariable Long id, @RequestBody RecordRequest recordRequest) {
         RecordEntity record = recordMapper.fromDto(recordRequest);
         record.setId(id);
