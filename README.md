@@ -6,7 +6,7 @@ POST: /register  -  for register
 POST: /auth  -  for user authentication  
 ### RecordController
 POST: /  -  for adding new record  
-POST: /update/{id}  -  for update record  
+POST: /{id}  -  for update record  
 DELETE: /{id}  -  for deleting record  
 GET: /{id}  -  get record by id  
 
