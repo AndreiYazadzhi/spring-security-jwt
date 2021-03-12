@@ -1,6 +1,5 @@
 package com.spring.security.jwt.service.impl;
 
-import com.spring.security.jwt.entity.RoleEntity;
 import com.spring.security.jwt.entity.UserEntity;
 import com.spring.security.jwt.repository.UserEntityRepository;
 import com.spring.security.jwt.service.UserService;
@@ -15,8 +14,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity save(UserEntity userEntity) {
-        RoleEntity userRole = new RoleEntity();
-        userRole.setName("USER");
         return userEntityRepository.save(userEntity);
     }
 
