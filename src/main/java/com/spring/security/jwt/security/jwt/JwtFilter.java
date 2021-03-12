@@ -21,7 +21,8 @@ import org.springframework.web.filter.GenericFilterBean;
 @Log
 @AllArgsConstructor
 public class JwtFilter extends GenericFilterBean {
-    public static final String AUTHORIZATION = "Authorization";
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String HEADER_NAME = "Bearer ";
     private final JwtProvider jwtProvider;
     private final CustomUserDetailsService customUserDetailsService;
 
@@ -43,8 +44,8 @@ public class JwtFilter extends GenericFilterBean {
 
     private String getTokenFromRequest(HttpServletRequest request) {
         String bearer = request.getHeader(AUTHORIZATION);
-        if (hasText(bearer) && bearer.startsWith("Bearer ")) {
-            return bearer.substring(7);
+        if (hasText(bearer) && bearer.startsWith(HEADER_NAME)) {
+            return bearer.substring(HEADER_NAME.length());
         }
         return null;
     }

@@ -14,9 +14,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserEntityRepository userEntityRepository;
 
     @Override
-    public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public CustomUserDetails loadUserByUsername(String username) {
         UserEntity userEntity = userEntityRepository.findByLogin(username)
-                .orElseThrow(() -> new NoSuchElementException("Can`t find user with login " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("Can`t find user with login " + username));
         return CustomUserDetails.fromUserEntityToCustomUserDetails(userEntity);
     }
 }

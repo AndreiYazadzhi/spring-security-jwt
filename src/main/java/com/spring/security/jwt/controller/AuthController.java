@@ -8,6 +8,8 @@ import com.spring.security.jwt.security.jwt.JwtProvider;
 import com.spring.security.jwt.service.UserService;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,9 +22,10 @@ public class AuthController {
     private final UserMapper mapper;
 
     @PostMapping("/register")
-    public String registerUser(@RequestBody @Valid UserRequest request) {
-        userService.save(mapper.fromDto(request));
-        return "OK";
+    public ResponseEntity<UserEntity> registerUser(@RequestBody @Valid UserRequest request) {
+        UserEntity user = mapper.fromDto(request);
+        userService.save(user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/auth")

@@ -13,11 +13,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Log
 public class JwtProvider {
+    private static final Integer TERM = 15;
     @Value("$(jwt.secret)")
     private String jwtSecret;
 
     public String generateToken(String login) {
-        Date date = Date.from(LocalDate.now().plusDays(15)
+        Date date = Date.from(LocalDate.now().plusDays(TERM)
                 .atStartOfDay(ZoneId.systemDefault()).toInstant());
         return Jwts.builder()
                 .setSubject(login)
