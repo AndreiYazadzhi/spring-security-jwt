@@ -28,9 +28,11 @@ public class RecordController {
         recordService.add(recordMapper.fromDto(recordRequest));
     }
 
-    @PutMapping
-    public void update(@RequestBody RecordRequest recordRequest) {
-        recordService.update(recordMapper.fromDto(recordRequest));
+    @PutMapping("/{id}")
+    public void update(@PathVariable Long id,@RequestBody RecordRequest recordRequest) {
+        RecordEntity record = recordMapper.fromDto(recordRequest);
+        record.setId(id);
+        recordService.update(record);
     }
 
     @DeleteMapping("/{id}")

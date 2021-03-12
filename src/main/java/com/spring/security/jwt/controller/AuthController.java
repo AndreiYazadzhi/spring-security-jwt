@@ -22,10 +22,9 @@ public class AuthController {
     private final UserMapper mapper;
 
     @PostMapping("/register")
-    public ResponseEntity<UserEntity> registerUser(@RequestBody @Valid UserRequest request) {
-        UserEntity user = mapper.fromDto(request);
-        userService.save(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<String> registerUser(@RequestBody @Valid UserRequest request) {
+        userService.save(mapper.fromDto(request));
+        return new ResponseEntity<>("OK", HttpStatus.OK);
     }
 
     @PostMapping("/auth")
